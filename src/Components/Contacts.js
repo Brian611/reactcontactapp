@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Items from './Items';
 
 var contacts = [
-    { firstName : "Moira",lastName:"Pooe", cellNumber:"0603241714"},
-    { firstName : "Brian",lastName:"Pooe", cellNumber:"0786452611"}
+    { firstName: "Moirah", lastName: "Pooe", cellNumber: "0603241714" },
+    { firstName: "Brian", lastName: "Pooe", cellNumber: "0786452611" }
 ]
 class Contacts extends Component {
     constructor(props) {
@@ -11,6 +11,7 @@ class Contacts extends Component {
         this.state = {
             contacts
         }
+      
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
@@ -28,7 +29,6 @@ class Contacts extends Component {
                 [e.target.name]: e.target.value
             });
     }
-
     render() {
         return (
             <div>
@@ -55,7 +55,7 @@ class Contacts extends Component {
                     </div>
                 </form>
                 <hr />
-                <Items />
+                <Items contacts={this.state.contacts} />
             </div>
         );
     }
