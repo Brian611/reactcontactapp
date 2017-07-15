@@ -11,7 +11,7 @@ class Contacts extends Component {
         super(props)
         this.state = {
             contacts,
-            selectedContact: { firstName: "", lastName: "", cellNumber: "", avatar: "" }
+            selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,7 +62,7 @@ class Contacts extends Component {
 
                             <div className="seven wide field">
                                 <button className="ui button primary" type="submit">Submit</button>
-                                <button onClick={() => this.setState({ selectedContact: {} })} className="ui button primary" type="reset">Reset</button>
+                                <button onClick={() => this.setState({ selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' } })} className="ui button primary" type="reset">Reset</button>
                             </div>
                         </div>
                     </div>
