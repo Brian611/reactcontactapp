@@ -1,18 +1,20 @@
 import React from 'react';
 
-function Item({ contact }) {
+function Item({ contact, onSelectedContact }) {
 
-    return (<div className="panel-body">
-        <ul className="list-group">
-            <li className="list-group-item">
-                {contact.lastName} - {contact.firstName} - {contact.cellNumber}
-                <div className="pull-right action-buttons">
-                    <a href="http://www.jquery2dotnet.com"><span className="glyphicon glyphicon-pencil"></span></a>
-                    <a href="http://www.jquery2dotnet.com" className="trash"><span className="glyphicon glyphicon-trash"></span></a>
-                </div>
-            </li>
-        </ul>
-    </div>)
+    return (
+        <div className="item" onClick={() => onSelectedContact(contact)}>
+            <div className="right floated content">
+                <div className="negative button ui">delete</div>
+            </div>
+            <img className="ui avatar image" src={contact.avatar} alt={contact.firstName}></img>
+            <div className="content">
+                <div className="header">{contact.firstName}  {contact.lastName}</div>
+                <div className="ui label">Cell No : {contact.cellNumber} <br />
+                    ID : {contact.id}</div>
+            </div>
+        </div>
+    )
 }
 
 export default Item;
