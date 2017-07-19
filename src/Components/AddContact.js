@@ -22,9 +22,10 @@ class AddContact extends Component {
     handleSubmit(e) {
         e.preventDefault();
         let guid = shortid.generate();
-        this.setState({ id: guid });
-        console.log("add contact state :", this.state);
-        this.props.onAddContact(this.state);
+        let newContact = this.state;
+        newContact.id = guid;
+        
+        this.props.onAddContact(newContact);
         this.setState({
             id: '',
             firstName: '',

@@ -33,9 +33,9 @@ class Contacts extends Component {
     }
 
     onAddContact(newContact) {
-        console.log("contact state :", this.state.contacts);
-        // const toBeAddedContact = [...this.state.contacts, newContact]
-        //this.setState({ contacts: toBeAddedContact });
+        const toBeAddedContact = [...this.state.contacts, newContact]
+        this.setState({ contacts: toBeAddedContact });
+        console.log("new contact", this.state);
     }
     render() {
 
