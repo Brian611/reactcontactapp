@@ -13,6 +13,7 @@ class AddContact extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onHandleChange = this.onHandleChange.bind(this);
+        this.clearFormInput = this.clearFormInput.bind(this);
     }
     onHandleChange(e) {
 
@@ -21,11 +22,13 @@ class AddContact extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        let guid = shortid.generate();
         let newContact = this.state;
-        newContact.id = guid;
+        newContact.id = shortid.generate();
         
         this.props.onAddContact(newContact);
+        this.clearFormInput();
+    }
+    clearFormInput(){
         this.setState({
             id: '',
             firstName: '',
@@ -60,7 +63,7 @@ class AddContact extends Component {
 
                             <div className="seven wide field">
                                 <button className="ui button primary" type="submit">Submit</button>
-                                <button onClick={() => this.setState({})} className="ui button primary" type="reset">Reset</button>
+                                <button onClick={() => this.clearFormInput} className="ui button yellow" type="reset">Reset</button>
                             </div>
                         </div>
                     </div>
