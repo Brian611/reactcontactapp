@@ -8,9 +8,12 @@ const Items = ({ contacts, onSelectedContact }) => {
     });
 
     return (
-        <div className="ui celled animated list">
-            {singleContact}
-            <h6> Total Contacts <span className="label label-info">{contacts.length}</span></h6>
+        <div>
+             <h3 id="contact-list">Contact List</h3>
+            <div className="ui celled animated list">
+                {singleContact}
+                <h6> Total Contacts <span className="label label-info">{contacts.length}</span></h6>
+            </div>
         </div>
     )
 }

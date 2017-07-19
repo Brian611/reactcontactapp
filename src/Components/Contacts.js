@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Items from './Items';
+import AddContact from './AddContact';
+import EditContact from './EditContact';
 
 var contacts = [
     { id: "23TplPdS", firstName: "Gloria", lastName: "Botha", cellNumber: "5465454654", avatar: "http://avatars.jurko.net/uploads/avatar_24155.jpg" },
@@ -11,64 +13,43 @@ class Contacts extends Component {
         super(props)
         this.state = {
             contacts,
-            selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' }
+            selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' },
+            editContact: false,
+            addContact: true
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
         this.onSelectedContact = this.onSelectedContact.bind(this);
+        this.onAddContact = this.onAddContact.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log(this.state);
-    }
-
-    onChange(e) {
-
-        this.setState(
-            {
-                [e.target.name]: e.target.value
-            });
+        console.log(this.state.contacts);
     }
     onSelectedContact(contact) {
         this.setState({ selectedContact: contact });
+    }
+
+    onAddContact(newContact) {
+        console.log("contact state :", this.state.contacts);
+        // const toBeAddedContact = [...this.state.contacts, newContact]
+        //this.setState({ contacts: toBeAddedContact });
     }
     render() {
 
         return (
             <div>
-                <h3>Contact</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="ui form">
-                        <div className="inline feilds">
-                            <div className="field">
-                                <label>First name</label>
-                                <input type="text" placeholder="First Name" name="firstName" onChange={this.onChange} value={this.state.selectedContact.firstName} />
-                            </div>
-                            <div className="field">
-                                <label>Last name</label>
-                                <input type="text" placeholder="Last Name" name="lastName" onChange={this.onChange} value={this.state.selectedContact.lastName} />
-                            </div>
-                            <div className="field">
-                                <label>Cell Number</label>
-                                <input type="text" placeholder="Cell Number" name="cellNumber" onChange={this.onChange} value={this.state.selectedContact.cellNumber} />
-                            </div>
-                            <div className="field">
-                                <label htmlFor="">Avatar Url</label>
-                                <input type="text" placeholder="avatar url" onChange={this.onChange} value={this.state.selectedContact.avatar} />
-                            </div>
-
-                            <div className="seven wide field">
-                                <button className="ui button primary" type="submit">Submit</button>
-                                <button onClick={() => this.setState({ selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' } })} className="ui button primary" type="reset">Reset</button>
-                            </div>
-                        </div>
+                <div className="ui grid">
+                    <div className="eight wide column">
+                        {this.state.addContact && <AddContact onAddContact={this.onAddContact} />}
+                        {this.state.editContact && <EditContact />}
                     </div>
-                </form>
-                <hr />
-                <Items onSelectedContact={this.onSelectedContact} contacts={this.state.contacts} />
+                    <div className="eight wide colum">
+                        <Items onSelectedContact={this.onSelectedContact} contacts={this.state.contacts} />
+                    </div>
+                </div>
             </div>
         );
     }
