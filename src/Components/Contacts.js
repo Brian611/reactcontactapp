@@ -21,6 +21,7 @@ class Contacts extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onSelectedContact = this.onSelectedContact.bind(this);
         this.onAddContact = this.onAddContact.bind(this);
+        this.deleteContact = this.deleteContact.bind(this);
     }
 
     handleSubmit(e) {
@@ -37,6 +38,9 @@ class Contacts extends Component {
         this.setState({ contacts: toBeAddedContact });
         console.log("new contact", this.state);
     }
+    deleteContact(contact) {
+        this.state.contacts.splice(contact, 1);
+    }
     render() {
 
         return (
@@ -47,7 +51,7 @@ class Contacts extends Component {
                         {this.state.editContact && <EditContact />}
                     </div>
                     <div className="eight wide colum">
-                        <Items onSelectedContact={this.onSelectedContact} contacts={this.state.contacts} />
+                        <Items deleteContact={this.deleteContact} onSelectedContact={this.onSelectedContact} contacts={this.state.contacts} />
                     </div>
                 </div>
             </div>

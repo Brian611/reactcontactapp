@@ -62,8 +62,8 @@ class AddContact extends Component {
                             </div>
 
                             <div className="seven wide field">
-                                <button className="ui button primary" type="submit">Submit</button>
-                                <button onClick={() => this.clearFormInput} className="ui button yellow" type="reset">Reset</button>
+                                <button className="ui inverted brown button" type="submit">Submit</button>
+                                <button onClick={() => this.clearFormInput} className="ui inverted brown button" type="reset">Reset</button>
                             </div>
                         </div>
                     </div>
