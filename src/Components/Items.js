@@ -4,7 +4,7 @@ import Item from './Item';
 const Items = ({ contacts, onSelectedContact, deleteContact }) => {
 
     const singleContact = contacts.map((contact) => {
-        return <Item deleteContact={deleteContact} onSelectedContact={onSelectedContact} key={contact.id} contact={contact} />
+        return <Item key={contact.id} deleteContact={deleteContact} onSelectedContact={onSelectedContact} contact={contact} />
     });
 
     return (

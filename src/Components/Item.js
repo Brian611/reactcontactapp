@@ -3,9 +3,9 @@ import React from 'react';
 function Item({ contact, onSelectedContact , deleteContact}) {
 
     return (
-        <div className="item" onClick={() => onSelectedContact(contact)}>
+        <div className="item">
             <div className="right floated content">
-                <button className="ui inverted brown  icon button">
+                <button onClick={() => onSelectedContact(contact)} className="ui inverted brown  icon button">
                     <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
                 <button onClick={() => deleteContact(contact)} className="ui inverted brown  icon button">

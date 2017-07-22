@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import update from 'immutability-helper';
 import Items from './Items';
 import AddContact from './AddContact';
 import EditContact from './EditContact';
+
 
 var contacts = [
     { id: "23TplPdS", firstName: "Gloria", lastName: "Botha", cellNumber: "5465454654", avatar: "http://avatars.jurko.net/uploads/avatar_24155.jpg" },
@@ -13,7 +15,7 @@ class Contacts extends Component {
         super(props)
         this.state = {
             contacts,
-            selectedContact: { firstName: '', lastName: '', cellNumber: '', avatar: '' },
+            selectedContact: {},
             editContact: false,
             addContact: true
         }
@@ -22,6 +24,7 @@ class Contacts extends Component {
         this.onSelectedContact = this.onSelectedContact.bind(this);
         this.onAddContact = this.onAddContact.bind(this);
         this.deleteContact = this.deleteContact.bind(this);
+        this.editContact = this.editContact.bind(this);
     }
 
     handleSubmit(e) {
@@ -30,16 +33,39 @@ class Contacts extends Component {
         console.log(this.state.contacts);
     }
     onSelectedContact(contact) {
-        this.setState({ selectedContact: contact });
+        this.setState({ addContact: false, editContact: true, selectedContact: contact });
     }
 
     onAddContact(newContact) {
-        const toBeAddedContact = [...this.state.contacts, newContact]
-        this.setState({ contacts: toBeAddedContact });
-        console.log("new contact", this.state);
+        this.setState({ contacts: update(this.state.contacts, { $unshift: [newContact] }) });
     }
+
     deleteContact(contact) {
-        this.state.contacts.splice(contact, 1);
+        this.setState({
+            contacts: update(this.state.contacts, { $splice: [[contact.id, 1]] })
+        })
+    }
+
+    editContact(newContact) {
+        let found = false;
+        let x = 0;
+        for (let i = 0; i < this.state.contacts.length; i++) {
+            if (this.state.contacts[i].id === newContact.id) {
+                found = true;
+                x = i;
+            }
+        }
+        if (found) {
+            let updatedContacts = update(this.state.contacts, {
+                [x]: {
+                    firstName: { $set: newContact.firstName },
+                    lastName: { $set: newContact.lastName },
+                    cellNumber: { $set: newContact.cellNumber },
+                    avatar: { $set: newContact.avatar },
+                },
+            });
+            this.setState({ contacts: updatedContacts, editContact: false, addContact: true });
+        }
     }
     render() {
 
@@ -48,7 +74,7 @@ class Contacts extends Component {
                 <div className="ui grid">
                     <div className="eight wide column">
                         {this.state.addContact && <AddContact onAddContact={this.onAddContact} />}
-                        {this.state.editContact && <EditContact />}
+                        {this.state.editContact && <EditContact contact={this.state.selectedContact} toBeEdited={this.editContact} />}
                     </div>
                     <div className="eight wide colum">
                         <Items deleteContact={this.deleteContact} onSelectedContact={this.onSelectedContact} contacts={this.state.contacts} />
