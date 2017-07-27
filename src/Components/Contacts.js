@@ -29,7 +29,6 @@ class Contacts extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         console.log(this.state.contacts);
     }
     onSelectedContact(contact) {
