@@ -77,10 +77,28 @@ class AddContact extends Component {
     handleSubmit(e) {
         e.preventDefault();
         let newContact = this.state;
+        let formErrors = this.state.errors;
 
-        newContact.id = shortid.generate();
-        this.props.onAddContact(newContact);
-        this.clearFormInput();
+        if (newContact.firstName === '') {
+            formErrors.firstName = `firstName cannot be null`;
+        }
+        if (newContact.lastName === '') {
+            formErrors.lastName = `lastName cannot be null`;
+        }
+        if (newContact.cellNumber === '') {
+            formErrors.cellNumber = `cellNumber cannot be null`;
+        }
+        if (newContact.avatar === '') {
+            formErrors.avatar = `avatar cannot be null`
+        }
+        if (values(formErrors).some(x => x === '')) {
+            newContact.id = shortid.generate();
+            this.props.onAddContact(newContact);
+            this.clearFormInput();
+        } else {
+            this.setState({ errors: formErrors });
+        }
+
     }
     clearFormInput() {
         this.setState({
@@ -119,7 +137,7 @@ class AddContact extends Component {
                             </div>
 
                             <br />
-                            <button className="ui inverted brown button" type="submit">Submit</button>
+                            <button className="ui inverted brown button" disabled={values(this.state.errors).some(x => x !== '')} type="submit">Submit</button>
                             <button onClick={() => this.clearFormInput} className="ui inverted brown button" type="reset">Reset</button>
 
                         </div>
