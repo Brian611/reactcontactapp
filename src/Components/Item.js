@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Item({ contact, onSelectedContact , deleteContact}) {
+function Item({ contact, onSelectedContact, deleteContact }) {
 
     return (
         <div className="item">

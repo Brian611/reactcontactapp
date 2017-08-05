@@ -6,6 +6,7 @@
     "classnames": "^2.2.5",
     "immutability-helper": "^2.3.0",
     "lodash": "^4.17.4",
+    "re-base": "^3.0.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",

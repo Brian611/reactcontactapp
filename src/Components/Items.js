@@ -4,7 +4,11 @@ import Item from './Item';
 const Items = ({ contacts, onSelectedContact, deleteContact }) => {
 
     const singleContact = contacts.map((contact) => {
-        return <Item key={contact.id} deleteContact={deleteContact} onSelectedContact={onSelectedContact} contact={contact} />
+        if (contacts) {
+            return <Item key={contact.id} deleteContact={deleteContact} onSelectedContact={onSelectedContact} contact={contact} />
+        } else {
+            return <h1>loading...</h1>
+        }
     });
 
     return (
